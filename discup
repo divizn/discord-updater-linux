@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# directory history
+current_dir=$(pwd)
+
+
+echo "Which version of Discord do you want to download?"
+echo "1) .deb package"
+echo "2) .tar.gz archive"
+read -p "Select an option (1/2): " discord_choice
+
+cd /tmp
+
+# Vencord
+case $discord_choice in
+    1)
+        # Update Discord using .deb package
+        echo "Downloading and installing Discord (.deb package)..."
+        wget -O discord.deb "https://discord.com/api/download/stable?platform=linux&format=deb"
+        sudo dpkg -i discord.deb
+        ;;
+    2)
+        # Update Discord using .tar.gz archive
+        echo "Downloading and extracting Discord (.tar.gz archive)..."
+        wget -O discord.tar.gz "https://discord.com/api/download?platform=linux&format=tar.gz"
+        tar -xzf discord.tar.gz -C /opt
+        echo "Discord extracted to /opt."
+        ;;
+    *)
+        echo "Invalid option. Exiting."
+        exit 1
+        ;;
+esac
+
+echo
+echo "----------------------------------------------"
+echo
+
+# Vencord
+echo "Do you want to install/repair Vencord or OpenAsar?"
+echo "1) Yes"
+echo "2) No"
+echo "Learn more about Vencord here: https://vencord.dev/"
+read -p "Select an option (1/2): " vencord_choice
+
+case $vencord_choice in
+    1)
+        echo "Installing/repairing Vencord..."
+        sh -c "$(curl -sS https://raw.githubusercontent.com/Vendicated/VencordInstaller/main/install.sh)"
+        ;;
+    2)
+        echo "Skipping Vencord installation."
+        ;;
+    *)
+        echo "Invalid option. Exiting."
+        ;;
+esac
+
+# Return to the original directory
+cd "$current_dir"
+
+echo "Done!"
+
