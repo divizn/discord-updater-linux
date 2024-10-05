@@ -10,7 +10,7 @@ This bash script makes it easier to install Discord with the official package, w
 1. Install script
 2. Make the script executable by running:
    ```bash
-   chmod +x update_discord.sh
+   chmod +x discup
     ```
 3. Run the script (`./discup` or add to PATH)
 4. Choose either `deb` pkg or `tar.gz`
